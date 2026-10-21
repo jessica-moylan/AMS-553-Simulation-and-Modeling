@@ -6,4 +6,4 @@ Data Generation:
 
 Notes from Jess:
  - I use the pixi enviornemnt manager but feel free to use whatever, just make a comment if you use a specific version of a package or anything
- - (AMS-553-Simulation-and-Modeling/random_variate_generator.py)[AMS-553-Simulation-and-Modeling/random_variate_generator.py] has a bunch of random variable generation 
+ - [AMS-553-Simulation-and-Modeling/random_variate_generator.py](AMS-553-Simulation-and-Modeling/random_variate_generator.py) has a bunch of random variable generation 
