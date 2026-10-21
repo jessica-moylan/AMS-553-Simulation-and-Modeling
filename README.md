@@ -3,6 +3,10 @@ Sources of information:
 Data Generation:
 - https://www.kaggle.com/datasets/mohankrishnathalla/credit-card-fraud-detection-dataset-2026 (used for finding distribution of transactions each hour)
 
+TODOs:
+- Add better documentation for random functions
+- (JESS): Use Acceptance/Rejection to determine distributions used for time-of-day and fraud or no
+
 
 Notes from Jess:
  - I use the pixi enviornemnt manager but feel free to use whatever, just make a comment if you use a specific version of a package or anything
