@@ -1,0 +1,2 @@
+from utils import generate_discrete_variates
+from random_variate_generator import UniformRandomVariableGenerator, NormalRandomVariableGenerator, StandardNormalRandomVariableGenerator

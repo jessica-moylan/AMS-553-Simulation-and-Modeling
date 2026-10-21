@@ -1,0 +1,15 @@
+[workspace]
+authors = ["jmoylan <jessicamoylan10@gmail.com>"]
+channels = ["conda-forge"]
+name = "AMS-553-Simulation-and-Modeling"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+ipykernel = ">=7.4.0,<8"
+ipython = ">=9.17.1,<10"
+pandas = ">=3.0.6,<4"
+python = ">=3.14.8,<3.15"
+matplotlib-base = ">=3.11.2,<4"
