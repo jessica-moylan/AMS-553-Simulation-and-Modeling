@@ -12,15 +12,23 @@ class RandomVariateGenerator:
         self.seed = (self.a * self.seed + self.c) % self.m
         return self.seed
 
-    def random(self) -> float:
+    def _random(self) -> float:
         """Generate a uniform variate in [0, 1)."""
         return self.next_integer() / self.m
 
-    def uniform(self, low: float=0.0, high: float=1.0) -> float:
+    def uniform(self, low: float=0.0, high: float=1.0, size: int = 1) -> float:
         """Generate a uniform variate in [low, high)."""
         if low > high:
             raise ValueError("low must be less than or equal to high")
-        return low + (high - low) * self.random()
+        if size == 1:
+            return low + (high - low) * self._random()
+        return [low + (high - low) * self._random() for _ in range(size)]
+
+    def uniform_int(self, low: int = 0, high: int = 2, size: int = 1) -> int | list[int]:
+        """Generate integers in [low, high) by scaling a uniform draw."""
+        if size == 1:
+            return low + int((high - low) * self._random())
+        return [low + int((high - low) * self._random()) for _ in range(size)]
 
     def standard_normal(self) -> list[float, float]:
         """Generate a standard normal variate using the polar method."""

@@ -1,2 +1,2 @@
-from utils import generate_discrete_variates, normal_variables
+from utils import generate_discrete_variates, normal_variables, get_num_days_in_month
 from random_variate_generator import RandomVariateGenerator

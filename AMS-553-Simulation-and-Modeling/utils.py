@@ -19,7 +19,7 @@ def generate_discrete_variates(values, generator = RandomVariateGenerator, count
     if probabilities is not None and not np.isclose(sum(probabilities), 1.0):
         raise ValueError("Probabilities must sum to 1.")
     if probabilities is None:
-        probabilities = np.full(count, [1/len(values)] * len(values))
+        probabilities = np.full(len(values), 1 / len(values))
     if not np.isclose(sum(probabilities), 1.0):
         raise ValueError("Probabilities must sum to 1.")
     look_up_table = generate_lookup_table(values, probabilities)
@@ -29,6 +29,18 @@ def generate_discrete_variates(values, generator = RandomVariateGenerator, count
         results[i] = int(look_up_table[index])
     return results
 
+def get_num_days_in_month(month: int) -> int:
+    if month in [1, 3, 5, 7, 8, 10, 12]:
+        return 31
+    elif month in [4, 6, 9, 11]:
+        return 30
+    elif month == 2:
+        return 28  # Ignoring leap years for simplicity
+    else:
+        raise ValueError("Invalid month")
+
+
+# TODO: this and normal_variables should probably be put into the RandomVariateGenerator class
 def _normal_variates(generator, mean = 0.0, stddev = 1.0, count = 1):
     for _ in range(count):
         yield generator.normal(mean, stddev)
