@@ -39,18 +39,12 @@ def get_num_days_in_month(month: int) -> int:
     else:
         raise ValueError("Invalid month")
 
-
-# TODO: this and normal_variables should probably be put into the RandomVariateGenerator class
-def _normal_variates(generator, mean = 0.0, stddev = 1.0, count = 1):
-    for _ in range(count):
-        yield generator.normal(mean, stddev)
-
 # TODO: Change this to the method that we learned in class
 def normal_variables(generator, mean = 0.0, stddev = 1.0, count = 1, lower = -np.inf, upper = np.inf) -> list:
     variables = []
     for _ in range(count):
         while True:
-            value = next(_normal_variates(generator, mean, stddev))
+            value = generator.normal(mean, stddev)
             if lower <= value <= upper:
                 variables.append(value)
                 break
