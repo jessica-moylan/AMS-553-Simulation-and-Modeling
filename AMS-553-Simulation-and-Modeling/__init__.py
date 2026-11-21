@@ -1,2 +1,3 @@
 from utils import generate_discrete_variates, normal_variables, get_num_days_in_month
 from random_variate_generator import RandomVariateGenerator
+from constants import NUM_CUSTOMERS, NUM_TRANSACTIONS, FRAUD_MEAN, FRAUD_STANDARD_DEVIATION, FRAUD_PERCENT_BETWEEN_1_AND_4, FRAUD_PERCENT_NOT_BETWEEN_1_AND_4
