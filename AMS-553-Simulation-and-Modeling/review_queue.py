@@ -1,4 +1,9 @@
 from random_variate_generator import RandomVariateGenerator
+from pathlib import Path
+import pandas as pd
+import matplotlib.pyplot as plt
+
+DATA_DIR = Path(__file__).parent / "data"
 
 def simulate_queue(arrival_times, review_times, num_reviewers):
     reviewers = [0] * num_reviewers
@@ -26,6 +31,8 @@ def results_summary(results, num_reviewers):
     Utilization
     Time avg number in system (L)
     Time-avg queue length (Lq) """
+    if not results:
+        return {"avg_wait": 0, "W": 0, "lambda": 0, "utilization": 0, "L": 0, "Lq": 0}
     waits = [customer["wait"] for customer in results]
     times_in_system = [customer["finish"] - customer["arrival"] for customer in results]
     review_times = [customer["finish"] - customer["start"] for customer in results]
@@ -45,7 +52,7 @@ def results_summary(results, num_reviewers):
     Lq = sum(waits) / end_time
 
     return {"avg_wait": avg_wait, "W": W, "lambda": lam, "utilization": utilization, "L": L, "Lq": Lq}
-        
+
 if __name__ == "__main__":
     num_reviewers=2
     #results = simulate_queue([0, 1, 2, 10], [5, 5, 5, 5], num_reviewers=1)
