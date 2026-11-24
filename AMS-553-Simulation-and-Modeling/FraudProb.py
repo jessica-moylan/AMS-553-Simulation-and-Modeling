@@ -7,7 +7,7 @@ k = .5
 
 dfPeople = pd.read_csv('AMS-553-Simulation-and-Modeling/data/people_data.csv')
 dfTT = pd.read_csv('AMS-553-Simulation-and-Modeling/data/transaction_table.csv')
-dfTT['transaction_time']=pd.to_datetime(dfTT['transaction_time']).dt.hour
+dfTT['hour'] = pd.to_datetime(dfTT['transaction_time']).dt.hour
 
 # x is going to be the row in the transaction table
 def NPtest (x):
@@ -20,20 +20,17 @@ def NPtest (x):
   return(fraudPDF/personPDF)
 
 accuracy = 0;
-for i in range(1000):
-  if NPtest(i) > k:
-    if k < NPtest(i) < k+3:
-      if 1 <= dfTT.at[i,'transaction_time'] <= 4: 
-        if dfTT.at[i,'is_fraud']==1:
-          accuracy += 1;
-      else:
-        if dfTT.at[i,'is_fraud']==0:
-          accuracy += 1;
-    elif  NPtest(i) > k+3:
-      if dfTT.at[i,'is_fraud']==1:
-        accuracy += 1;
-  else:
-    if dfTT.at[i,'is_fraud']==0:
-      accuracy += 1;
-print(accuracy/1000);
+def is_flagged(i):
+  ratio = NPtest(i)
+  if ratio > k + 3:
+    return 1
+  if ratio > k and 1 <= dfTT.at[i, 'hour'] <= 4:
+    return 1
+  return 0
 
+#print(accuracy/1000);
+dfTT['flagged'] = [is_flagged(i) for i in range(len(dfTT))]
+dfTT.to_csv('AMS-553-Simulation-and-Modeling/data/transaction_table_flagged.csv', index=False)
+
+accuracy = (dfTT['flagged'] == dfTT['is_fraud']).mean()
+print(accuracy)
